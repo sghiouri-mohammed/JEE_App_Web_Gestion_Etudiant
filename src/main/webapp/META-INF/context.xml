@@ -1,0 +1,13 @@
+<Context>
+<!-- Configuration de la ressource partagée -->
+
+  <Resource name="jdbc/TP1" 
+  			auth="Container" type="javax.sql.DataSource"
+               maxActive="20" maxIdle="5" maxWait="10000"
+               username="root" password="" 
+               driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3307/TP1"/>
+
+</Context>
+
+

@@ -13,7 +13,7 @@ import com.tp1.bdd.UserDbUtil;
 import com.tp1.beans.User;
 
 
-public class RegistrationServlet extends HttpServlet {
+public class DeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
       
 	private UserDbUtil tableUsers;
@@ -34,37 +34,27 @@ public class RegistrationServlet extends HttpServlet {
 			throw new ServletException(exc);
 		}
 	}
-    
-    public RegistrationServlet() {
+ 
+    public DeleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
 //		UserDbUtil tableUsers = new UserDbUtil();
-		request.setAttribute("users", tableUsers.recupererUser());
-
+		for ( User user : tableUsers.recupererUser()) {
+			if ( user.getId() == id ) {
+				tableUsers.deleteUser(user);
+				response.sendRedirect("/tP1_JEE/AdminServlet");
+			}
+		}
 		
-		this.getServletContext().getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
 	}
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		User user = new User();
-		user.setFname(request.getParameter("fname"));
-		user.setLname(request.getParameter("lname"));
-		user.setLogin(request.getParameter("login"));
-		user.setPassword(request.getParameter("password"));
-		user.setDob(request.getParameter("dob"));
-		user.setMobile(request.getParameter("mobile"));
 
-//		UserDbUtil tableUsers = new UserDbUtil();
-		tableUsers.ajouterUser(user);
-		request.setAttribute("valider", true);
-						
-		this.getServletContext().getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
+		this.getServletContext().getRequestDispatcher("/WEB-INF/admin-page.jsp").forward(request, response);
 	}
 
 }

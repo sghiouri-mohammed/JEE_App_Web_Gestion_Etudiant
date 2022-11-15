@@ -5,26 +5,26 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import javax.sql.DataSource;
+
 import com.tp1.beans.User;
-import com.tp1.beans.Utilisateur;
 
 public class UserDbUtil {
+	
+	private DataSource dataSource;
+	
+	public UserDbUtil(DataSource theDataSource) {
+		dataSource = theDataSource;
+	}
 	
 	//La fonction pour recuperer les users de la table USER de la base de donnees 
 	public List<User> recupererUser(){
 		
 		List<User> users = new ArrayList<User>();
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		}catch (ClassNotFoundException e) {
-		}
-		
+
 		//connexion a la base
 	
 		Connection connexion = null;
@@ -32,11 +32,12 @@ public class UserDbUtil {
 		ResultSet resultat = null;
 		
 		try {
-			connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TP1","root","");
+			connexion = dataSource.getConnection();
 			statement =  connexion.createStatement();
 			resultat = ((java.sql.Statement) statement).executeQuery(" select * from user ");
 			
 			while(resultat.next()) {
+				int _id = resultat.getInt("id");
 				String firstname = resultat.getString("fname");
 				String lastname = resultat.getString("lname");
 				String loginfield = resultat.getString("login");
@@ -46,6 +47,7 @@ public class UserDbUtil {
 				
 				//creer un user (object)
 				User user = new User();
+				user.setId(_id);
 				user.setFname(firstname);
 				user.setLname(lastname);
 				user.setLogin(loginfield);
@@ -68,8 +70,7 @@ public class UserDbUtil {
 				if (connexion != null)
 					connexion. close();
 				}catch (SQLException ignore) {}
-			}
-		
+			}		
 		return users;
 	}
 	
@@ -85,7 +86,7 @@ public class UserDbUtil {
 		
 		Connection connexion = null;
 		try {
-			connexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/TP1","root","");
+			connexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/TP1","root","");
 		}catch(SQLException e)
 		{
 			e.printStackTrace();
@@ -104,6 +105,66 @@ public class UserDbUtil {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void deleteUser(User user) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch (ClassNotFoundException e) {
+		}
+		
+		//connexion a la base
+		
+		Connection connexion = null;
+		try {
+			connexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/TP1","root","");
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		PreparedStatement preparedstatement;
+		try {
+			preparedstatement = connexion.prepareStatement("delete from user where id=? ;");
+			preparedstatement.setInt(1, user.getId());
+			preparedstatement.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+public void modifierUser(User user,String name, String lastname, String phone, int id) {
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}catch (ClassNotFoundException e) {
+		}
+		
+		//connexion a la base
+		
+		Connection connexion = null;
+		try {
+			connexion = DriverManager.getConnection("jdbc:mysql://localhost:3307/TP1","root","");
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		
+		PreparedStatement preparedstatement;
+		try {
+			preparedstatement = connexion.prepareStatement("UPDATE user SET fname=?, lname=?, mobile=? where id=? ;");
+			preparedstatement.setString(1, name);
+			preparedstatement.setString(2, lastname);
+			preparedstatement.setString(3, phone);
+			preparedstatement.setInt(4,id);
+			preparedstatement.executeUpdate(); 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

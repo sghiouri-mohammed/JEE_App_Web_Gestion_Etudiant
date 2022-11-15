@@ -55,10 +55,7 @@
 		                  </div>
 		                  
 		                </form>
-		                
-		                <%-- <c:if test="${ drapo == 2 }">
-							<p> <c:out value="Ce compte n'existe pas !! "/>  </p>
-						</c:if> --%>
+
 		              </div>
 		              
 		              <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">		
@@ -71,13 +68,6 @@
 		    </div>
 		  </div>
 		</section>
-		
-		<%-- <p>
-			<c:out value="${login }"></c:out>
-			<c:out value="${pass }"></c:out>
-		</p> --%>
-		
-		
-		
+			
 </body>
 </html>

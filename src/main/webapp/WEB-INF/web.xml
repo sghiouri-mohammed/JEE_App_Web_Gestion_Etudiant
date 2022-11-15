@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp" xmlns:web="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd http://xmlns.jcp.org/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="5.0">
-  <servlet>
-    <display-name>Test</display-name>
-    <servlet-name>Test</servlet-name>
-    <servlet-class>com.tp1.servlets.Test</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Test</servlet-name>
-    <url-pattern>/bonjour</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>Acceuil</display-name>
-    <servlet-name>Acceuil</servlet-name>
-    <servlet-class>com.tp1.servlets.Acceuil</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Acceuil</servlet-name>
-    <url-pattern>/accueil</url-pattern>
-  </servlet-mapping>
   <jsp-config>
     <jsp-property-group>
       <url-pattern> *.jsp</url-pattern>
@@ -65,4 +46,45 @@
     <servlet-name>LogoutServlet</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AdminServlet</display-name>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>com.tp1.servlets.AdminServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/AdminServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteServlet</display-name>
+    <servlet-name>DeleteServlet</servlet-name>
+    <servlet-class>com.tp1.servlets.DeleteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteServlet</servlet-name>
+    <url-pattern>/DeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Modifyservlet</display-name>
+    <servlet-name>Modifyservlet</servlet-name>
+    <servlet-class>com.tp1.servlets.Modifyservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Modifyservlet</servlet-name>
+    <url-pattern>/Modifyservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Modification</display-name>
+    <servlet-name>Modification</servlet-name>
+    <servlet-class>com.tp1.servlets.Modification</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Modification</servlet-name>
+    <url-pattern>/Modification</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

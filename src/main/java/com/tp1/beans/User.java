@@ -1,8 +1,5 @@
 package com.tp1.beans;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class User {
 	
@@ -12,6 +9,15 @@ public class User {
 	private String password;
 	private String dob;
 	private String mobile ;
+	private int id;
+	
+	public int getId() {
+		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public String getFname() {
 		return fname;
